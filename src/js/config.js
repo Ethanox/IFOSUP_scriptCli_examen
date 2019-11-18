@@ -10,5 +10,10 @@ export const DOMString = {
 	BUDGET_ENTREE: ".budget__entree--valeur",
 	BUDGET_EXPENSE: ".budget__depense--valeur",
 	BUDGET_EXPENSE_POURC: ".budget__depense--pourcentage",
-	BUDGET_GLOBAL: ".budget__valeur"
+	BUDGET_GLOBAL: ".budget__valeur",
+	BUDGET_TITLE_MONTH: ".budget__titre--mois"
 }
+
+export const MONTH = [
+	"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"
+]

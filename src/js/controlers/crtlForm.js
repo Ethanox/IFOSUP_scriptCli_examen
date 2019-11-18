@@ -4,7 +4,6 @@ import { updateView } from '../views/ViewBudget';
 import { DOMString } from '../config';
 
 export const ctrlForm = (budget) => {
-	// TODO check data
 	let temp = document.querySelector(DOMString.FORM_MONTH);
 	const month = temp[temp.selectedIndex].value;
 	temp = document.querySelector(DOMString.FORM_TYPE);

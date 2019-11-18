@@ -1,12 +1,19 @@
-import { DOMString } from "../config"
+import { DOMString, MONTH } from "../config"
 
-export const updateView = (budgetClass) => {
-	const entree = budgetClass.getTot("ent")
-	const expense = budgetClass.getTot("dep")
+export const updateView = (budgetClass, month) => {
+	const entree = budgetClass.getTot("ent", month)
+	const expense = budgetClass.getTot("dep", month)
 	document.querySelector(DOMString.BUDGET_ENTREE).textContent = formatNombre(entree, "ent")
 	document.querySelector(DOMString.BUDGET_EXPENSE).textContent = formatNombre(expense, "dep")
 	document.querySelector(DOMString.BUDGET_GLOBAL).textContent = formatNombre((entree - expense), entree >= expense ? "ent" : "dep")
 	document.querySelector(DOMString.BUDGET_EXPENSE_POURC).textContent = (entree === 0 ? "---" : Math.round((expense / entree) * 100)) + "%"
+	document.querySelector(DOMString.BUDGET_TITLE_MONTH).textContent = MONTH[month]
+	// close all collapse
+	$('.collapse').collapse('hide')
+	// open 'entree' collapse
+	$("#accordion_body_ent_" + month).collapse('show')
+	// open 'expense' collapse
+	$("#accordion_body_dep_" + month).collapse('show')
 }
 
 const formatNombre = function (nombre, type) {

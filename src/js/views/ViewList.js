@@ -1,37 +1,40 @@
+import { MONTH } from "../config";
 
 export const addBudgetList = budget => {
 	let tag, balise;
-	
-	if (document.getElementById("accordion_" + budget.type + "_" + budget.month) == null) {
-		console.log("debug1")
+
+	if (!document.getElementById("accordion_" + budget.type)) {
 		balise = `
-		<div class="accordion" id="accordion_${budget.type}_${budget.month}">
-			<div class="card">
-			</div>
+		<div class="accordion" id="accordion_${budget.type}">
 		</div>`
-		document.querySelector("#entree > .entree__list").insertAdjacentHTML('afterbegin', balise);
+
+		if (budget.type === "ent") {
+			document.querySelector("#entree > .entree__list").insertAdjacentHTML('afterbegin', balise);
+		} else {
+			document.querySelector("#depense > .depense__list").insertAdjacentHTML('afterbegin', balise);
+		}
 	}
-	
+
 	if (!document.getElementById("accordion_header_" + budget.type + "_" + budget.month)) {
-		console.log("debug2")
 		balise = `
-		<div class="card-header" id="accordion_header_${budget.type + "_" + budget.month}">
-			<h2 class="mb-0">
-				<button class="btn btn-link" type="button" data-toggle="collapse"
-					data-target="#accordion_body_${budget.type + "_" + budget.month}" aria-expanded="true" aria-controls="accordion_body_${budget.type + "_" + budget.month}">
-					${budget.month}
-				</button>
-			</h2>
-		</div>
+		<div class="card">
+			<div class="card-header" id="accordion_header_${budget.type + "_" + budget.month}" month="${budget.month}">
+				<h2 class="mb-0">
+					<button class="btn btn-link" type="button" data-toggle="collapse"
+						data-target="#accordion_body_${budget.type + "_" + budget.month}" aria-controls="accordion_body_${budget.type + "_" + budget.month}">
+						${MONTH[budget.month]}
+					</button>
+				</h2>
+			</div>
 
-		<div id="accordion_body_${budget.type}_${budget.month}" class="collapse show" aria-labelledby="accordion_header_${budget.type}_${budget.month}"
-			data-parent="#accordion_${budget.type}_${budget.month}">
-			<div class="card-body">
+			<div id="accordion_body_${budget.type}_${budget.month}" class="collapse" aria-labelledby="accordion_header_${budget.type}_${budget.month}"
+				data-parent="#accordion_${budget.type}">
+				<div class="card-body">
 
+				</div>
 			</div>
 		</div>`
-		console.log(document.querySelector("#accordion_" + budget.type + "_" + budget.month + " > .card"))
-		document.querySelector("#accordion_" + budget.type + "_" + budget.month + " > .card").insertAdjacentHTML('afterbegin', balise);
+		document.querySelector("#accordion_" + budget.type).insertAdjacentHTML('afterbegin', balise);
 	}
 	if (budget.type === "ent") {
 		balise = `
@@ -60,7 +63,7 @@ export const addBudgetList = budget => {
             </div>
         </div>`
 	}
-	document.querySelector("#accordion_body_"+ budget.type + "_" + budget.month + " > .card-body").insertAdjacentHTML('afterbegin', balise);
+	document.querySelector("#accordion_body_" + budget.type + "_" + budget.month + " > .card-body").insertAdjacentHTML('afterbegin', balise);
 }
 
 export const removeBudgetList = budgetId => {

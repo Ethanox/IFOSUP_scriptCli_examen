@@ -43,12 +43,6 @@
 	<div class="bottom">
 		<div class="add">
 			<form class="add__container" id="form_budget">
-				<select class="add__month">
-					<option value="Janvier">Janvier</option>
-					<option value="Fevrier">Février</option>
-					<option value="Mars">Mars</option>
-					<option value="Avril">Avril</option>
-				</select>
 				<select class="add__type">
 					<option value="ent">+</option>
 					<option value="dep">-</option>
@@ -59,16 +53,18 @@
 			</form>
 		</div>
 
-		<div class="container clearfix">
-			<div class="entree" id="entree">
-				<h2 class="entree__titre">entree</h2>
-				<div class="entree__list">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="jumbotron col-12 col-sm-6" id="entree">
+					<h2 class="entree__titre">entree</h2>
+					<div class="entree__list">
+					</div>
 				</div>
-			</div>
 
-			<div class="depense">
-				<h2 class="depense__titre">dépense</h2>
-				<div class="depense__list">
+				<div class="jumbotron col-12 col-sm-6" id="depense">
+					<h2 class="depense__titre">dépense</h2>
+					<div class="depense__list">
+					</div>
 				</div>
 			</div>
 		</div>

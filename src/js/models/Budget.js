@@ -29,10 +29,10 @@ export default class Budget {
 		return "ID" + (Math.floor(Math.random() * (max - min)) + min)
 	}
 
-	getTot(type) {
+	getTot(type, month) {
 		let sum = 0
 		this.budgets.forEach((budget) => {
-			if (type === "*" || budget.type === type)
+			if ((type === "*" || budget.type === type) && month === budget.month)
 				sum += parseFloat(budget.value);
 		})
 		return sum
