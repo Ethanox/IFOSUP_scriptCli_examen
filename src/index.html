@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
 	<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Gestion budget</title>
 </head>
 
@@ -41,6 +43,12 @@
 	<div class="bottom">
 		<div class="add">
 			<form class="add__container" id="form_budget">
+				<select class="add__month">
+					<option value="Janvier">Janvier</option>
+					<option value="Fevrier">Février</option>
+					<option value="Mars">Mars</option>
+					<option value="Avril">Avril</option>
+				</select>
 				<select class="add__type">
 					<option value="ent">+</option>
 					<option value="dep">-</option>
@@ -52,72 +60,30 @@
 		</div>
 
 		<div class="container clearfix">
-			<div class="entree">
+			<div class="entree" id="entree">
 				<h2 class="entree__titre">entree</h2>
-
 				<div class="entree__list">
-
-					<!--
-                        <div class="item clearfix" id="entree-0">
-                            <div class="item__description">Salaire</div>
-                            <div class="right clearfix">
-                                <div class="item__valeur">+ 2,100.00</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix" id="entree-1">
-                            <div class="item__description">Vente voiture</div>
-                            <div class="right clearfix">
-                                <div class="item__valeur">+ 1,500.00</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
 				</div>
 			</div>
 
-
-
 			<div class="depense">
 				<h2 class="depense__titre">dépense</h2>
-
 				<div class="depense__list">
-
-					<!--
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Loyer d'appartement</div>
-                            <div class="right clearfix">
-                                <div class="item__valeur">- 900.00</div>
-                                <div class="item__pourcentage">21%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item clearfix" id="expense-1">
-                            <div class="item__description">Epicerie</div>
-                            <div class="right clearfix">
-                                <div class="item__valeur">- 435.28</div>
-                                <div class="item__pourcentage">10%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
 				</div>
 			</div>
 		</div>
 
 	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>

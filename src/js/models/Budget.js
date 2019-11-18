@@ -4,10 +4,10 @@ export default class Budget {
 		this.budgets = []
 		this.getStorage()
 	}
-
-	addBudget(type, desc, value) {
+	
+	addBudget(month, type, desc, value) {
 		const id = this.generateNewId()
-		const budget = { id, type, desc, value }
+		const budget = {id, month, type, desc, value }
 		this.budgets.push(budget)
 		this.localStorage()
 		return budget

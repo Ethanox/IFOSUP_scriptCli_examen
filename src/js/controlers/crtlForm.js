@@ -5,11 +5,13 @@ import { DOMString } from '../config';
 
 export const ctrlForm = (budget) => {
 	// TODO check data
-	const temp = document.querySelector(DOMString.FORM_TYPE);
+	let temp = document.querySelector(DOMString.FORM_MONTH);
+	const month = temp[temp.selectedIndex].value;
+	temp = document.querySelector(DOMString.FORM_TYPE);
 	const type = temp[temp.selectedIndex].value;
 	const desc = document.querySelector(DOMString.FORM_DESC).value;
 	const value = document.querySelector(DOMString.FORM_VALUE).value;
-	const newBudget = budget.addBudget(type, desc, value);
+	const newBudget = budget.addBudget(month, type, desc, value);
 	clear();
 	addBudgetList(newBudget);
 	updateView(budget);

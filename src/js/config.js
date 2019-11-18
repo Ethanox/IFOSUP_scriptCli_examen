@@ -1,5 +1,6 @@
 export const DOMString = {
 	FORM: "#form_budget",
+	FORM_MONTH: "#form_budget > select.add__month",
 	FORM_TYPE: "#form_budget > select.add__type",
 	FORM_DESC: "#form_budget > input.add__description",
 	FORM_VALUE: "#form_budget > input.add__valeur",
