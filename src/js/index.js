@@ -4,6 +4,7 @@ import Budget from './models/Budget'
 import {updateView} from './views/ViewBudget'
 import {initForm} from './views/ViewForm'
 import { DOMString } from './config'
+import '../styles/style.css';
 
 
 

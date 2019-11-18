@@ -1,62 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
-        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-        <link type="text/css" rel="stylesheet" href="style.css">
-        <title>Gestion budget</title>
-    </head>
-    <body>
-        
-        <div class="top">
-            <div class="budget">
-                <div class="budget__titre">
-                    Budget disponible en <span class="budget__titre--mois">%Month%</span>:
-                </div>
-                
-                <div class="budget__valeur">+ 2,345.64</div>
-                
-                <div class="budget__entree clearfix">
-                    <div class="budget__entree--text">entrée</div>
-                    <div class="right">
-                        <div class="budget__entree--valeur">+ 4,300.00</div>
-                        <div class="budget__entree--pourcentage">&nbsp;</div>
-                    </div>
-                </div>
-                
-                <div class="budget__depense clearfix">
-                    <div class="budget__depense--text">depense</div>
-                    <div class="right clearfix">
-                        <div class="budget__depense--valeur">- 1,954.36</div>
-                        <div class="budget__depense--pourcentage">45%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <div class="bottom">
-            <div class="add">
-                <div class="add__container">
-                    <select class="add__type">
-                        <option value="ent" selected>+</option>
-                        <option value="dep">-</option>
-                    </select>
-                    <input type="text" class="add__description" placeholder="Ajout description">
-                    <input type="number" class="add__valeur" placeholder="valeur">
-                    <button class="add__btn"><i class="ion-ios-checkmark-outline"></i></button>
-                </div>
-            </div>
-            
-            <div class="container clearfix">
-                <div class="entree">
-                    <h2 class="entree__titre">entree</h2>
-                    
-                    <div class="entree__list">
-                       
-                        <!--
+
+<head>
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
+	<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<title>Gestion budget</title>
+</head>
+
+<body>
+
+	<div class="top">
+		<div class="budget">
+			<div class="budget__titre">
+				Budget disponible en <span class="budget__titre--mois">%Month%</span>:
+			</div>
+
+			<div class="budget__valeur">+ 2,345.64</div>
+
+			<div class="budget__entree clearfix">
+				<div class="budget__entree--text">entrée</div>
+				<div class="right">
+					<div class="budget__entree--valeur">+ 4,300.00</div>
+					<div class="budget__entree--pourcentage">&nbsp;</div>
+				</div>
+			</div>
+
+			<div class="budget__depense clearfix">
+				<div class="budget__depense--text">depense</div>
+				<div class="right clearfix">
+					<div class="budget__depense--valeur">- 1,954.36</div>
+					<div class="budget__depense--pourcentage">45%</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="bottom">
+		<div class="add">
+			<form class="add__container" id="form_budget">
+				<select class="add__type">
+					<option value="ent">+</option>
+					<option value="dep">-</option>
+				</select>
+				<input type="text" class="add__description" placeholder="Ajout description">
+				<input type="number" class="add__valeur" placeholder="valeur">
+				<button class="add__btn"><i class="ion-ios-checkmark-outline"></i></button>
+			</form>
+		</div>
+
+		<div class="container clearfix">
+			<div class="entree">
+				<h2 class="entree__titre">entree</h2>
+
+				<div class="entree__list">
+
+					<!--
                         <div class="item clearfix" id="entree-0">
                             <div class="item__description">Salaire</div>
                             <div class="right clearfix">
@@ -77,18 +79,18 @@
                             </div>
                         </div>
                         -->
-                        
-                    </div>
-                </div>
-                
-                
-                
-                <div class="depense">
-                    <h2 class="depense__titre">dépense</h2>
-                    
-                    <div class="depense__list">
-                       
-                        <!--
+
+				</div>
+			</div>
+
+
+
+			<div class="depense">
+				<h2 class="depense__titre">dépense</h2>
+
+				<div class="depense__list">
+
+					<!--
                         <div class="item clearfix" id="expense-0">
                             <div class="item__description">Loyer d'appartement</div>
                             <div class="right clearfix">
@@ -111,11 +113,12 @@
                             </div>
                         </div>
                         -->
-                        
-                    </div>
-                </div>
-            </div>
-               
-        </div>
-    <script type="text/javascript" src="js/bundle.js"></script></body>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+<script type="text/javascript" src="js/bundle.js"></script></body>
+
 </html>
