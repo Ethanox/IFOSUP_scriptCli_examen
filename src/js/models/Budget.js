@@ -2,18 +2,24 @@
 export default class Budget {
 	constructor() {
 		this.budgets = []
+		this.getStorage()
 	}
 
 	addBudget(type, desc, value) {
 		const id = this.generateNewId()
 		const budget = { id, type, desc, value }
 		this.budgets.push(budget)
+		this.localStorage()
 		return budget
 	}
 
 	removeBudget(id) {
+		console.log(id)
+		console.log(this.budgets)
 		const index = this.budgets.findIndex(el => el.id === id)
+		console.log(index)
 		this.budgets.splice(index, 1)
+		this.localStorage()
 	}
 
 	generateNewId() {
@@ -30,5 +36,20 @@ export default class Budget {
 				sum += parseFloat(budget.value);
 		})
 		return sum
+	}
+
+	localStorage() {
+		localStorage.setItem('budget', JSON.stringify(this.budgets));
+	}
+
+	getStorage() {
+		const storage = JSON.parse(localStorage.getItem('budget'))
+		if (storage) {
+			this.budgets = storage
+		}
+	}
+
+	clearLocalStorage() {
+		localStorage.setItem('budget', JSON.stringify([]))
 	}
 }

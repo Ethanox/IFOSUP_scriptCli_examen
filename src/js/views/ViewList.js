@@ -1,11 +1,10 @@
 
 export const addBudgetList = budget => {
 	let tag, balise;
-	console.log(budget);
 	if (budget.type === "ent") {
 		tag = ".entree__list";
 		balise = `
-		<div class="item clearfix" id="entree${budget.id}">
+		<div class="item clearfix" id="${budget.id}">
 			<div class="item__description">${budget.desc}</div>
 				<div class="right clearfix">
 					<div class="item__valeur">+ ${budget.value}€</div>
@@ -19,7 +18,7 @@ export const addBudgetList = budget => {
 	} else {
 		tag = ".depense__list";
 		balise = `
-		<div class="item clearfix" id="expense${budget.id}">
+		<div class="item clearfix" id="${budget.id}">
 			<div class="item__description">${budget.desc}</div>
             <div class="right clearfix">
                 <div class="item__valeur">- ${budget.value}€</div>
@@ -35,5 +34,7 @@ export const addBudgetList = budget => {
 
 export const removeBudgetList = budgetId => {
 	const asupprimer = document.getElementById(budgetId);
+	console.log(asupprimer)
+	console.log(asupprimer.parentNode)
 	asupprimer.parentNode.removeChild(asupprimer);
 }

@@ -1,8 +1,10 @@
+import { DOMString } from "../config";
+
 export const clear = () => {
-	document.getElementById('form_budget').reset();
-	document.querySelector("#form_budget > select.add__type").focus();
+	document.querySelector(DOMString.FORM).reset()
+	document.querySelector(DOMString.FORM_TYPE).focus()
 }
 
 export const initForm = () => {
-	document.querySelector("#form_budget > select.add__type").focus();
+	document.querySelector(DOMString.FORM_TYPE).focus()
 }

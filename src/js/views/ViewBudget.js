@@ -1,10 +1,12 @@
+import { DOMString } from "../config"
+
 export const updateView = (budgetClass) => {
 	const entree = budgetClass.getTot("ent")
 	const expense = budgetClass.getTot("dep")
-	document.getElementsByClassName("budget__entree--valeur")[0].textContent = formatNombre(entree, "ent")
-	document.getElementsByClassName("budget__depense--valeur")[0].textContent = formatNombre(expense, "dep")
-	document.getElementsByClassName("budget__valeur")[0].textContent = formatNombre((entree - expense), entree >= expense ? "ent" : "dep")
-	document.getElementsByClassName("budget__depense--pourcentage")[0].textContent = (entree === 0 ? "---" : Math.round((expense / entree) * 100)) + "%"
+	document.querySelector(DOMString.BUDGET_ENTREE).textContent = formatNombre(entree, "ent")
+	document.querySelector(DOMString.BUDGET_EXPENSE).textContent = formatNombre(expense, "dep")
+	document.querySelector(DOMString.BUDGET_GLOBAL).textContent = formatNombre((entree - expense), entree >= expense ? "ent" : "dep")
+	document.querySelector(DOMString.BUDGET_EXPENSE_POURC).textContent = (entree === 0 ? "---" : Math.round((expense / entree) * 100)) + "%"
 }
 
 const formatNombre = function (nombre, type) {

@@ -1,4 +1,4 @@
-import {removeBudgetList} from '../views/ViewList';
+import {removeBudgetList, addBudgetList} from '../views/ViewList';
 import { updateView } from '../views/ViewBudget';
 
 export const ctrlListRemove = (budgetClass, budgetId) => {
@@ -6,4 +6,10 @@ export const ctrlListRemove = (budgetClass, budgetId) => {
 	removeBudgetList(budgetId);
 	updateView(budgetClass);
 };
+
+export const ctrlListInit = (budgetClass) => {
+	budgetClass.budgets.forEach(budget => {
+		addBudgetList(budget)
+	})
+}
 
