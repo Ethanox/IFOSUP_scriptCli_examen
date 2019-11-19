@@ -70,6 +70,7 @@ export default class Budget {
 				returnVar = false
 		})
 		return returnVar
+<<<<<<< Updated upstream
 	}
 
 	isLocalStorageAvailable() {
@@ -80,5 +81,7 @@ export default class Budget {
 		} catch (e) {
 			return false
 		}
+=======
+>>>>>>> Stashed changes
 	}
 }
