@@ -32,7 +32,7 @@ export default class Budget {
 	getTot(type, month) {
 		let sum = 0
 		this.budgets.forEach((budget) => {
-			if ((type === "*" || budget.type === type) && month === budget.month) {
+			if ((type === "*" || budget.type === type) && month == budget.month) {
 				sum += parseFloat(budget.value);
 			}
 		})
@@ -66,11 +66,10 @@ export default class Budget {
 	isEmptyMonth(type, month) {
 		let returnVar = true;
 		this.budgets.forEach((budget) => {
-			if ((type === "*" || type === budget.type) && month === budget.month)
+			if ((type === "*" || type === budget.type) && (month === "*" || month === budget.month))
 				returnVar = false
 		})
 		return returnVar
-<<<<<<< Updated upstream
 	}
 
 	isLocalStorageAvailable() {
@@ -81,7 +80,14 @@ export default class Budget {
 		} catch (e) {
 			return false
 		}
-=======
->>>>>>> Stashed changes
+	}
+
+	getMaxValue(type, month) {
+		let maxValue = 0;
+		this.budgets.forEach((budget) => {
+			if ((type === "*" || type === budget.type) && (month === "*" || month === budget.month) && maxValue < budget.value)
+				maxValue = budget.value
+		})
+		return maxValue
 	}
 }

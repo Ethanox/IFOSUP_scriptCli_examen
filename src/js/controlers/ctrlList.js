@@ -1,4 +1,4 @@
-import {removeBudgetList, addBudgetList, updatePourc} from '../views/ViewList';
+import {removeBudgetList, addBudgetList, updatePourc, updateCollapse} from '../views/ViewList';
 import { updateView } from '../views/ViewBudget';
 
 export const ctrlListRemove = (budgetClass, budgetId) => {
@@ -7,6 +7,7 @@ export const ctrlListRemove = (budgetClass, budgetId) => {
 	removeBudgetList(budget, budgetClass.isEmptyMonth("ent", budget.month));
 	updatePourc(budgetClass, budget.month);
 	updateView(budgetClass, new Date().getMonth());
+	updateCollapse(new Date().getMonth())
 };
 
 export const ctrlListInit = (budgetClass) => {

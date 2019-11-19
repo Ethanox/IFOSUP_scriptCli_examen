@@ -285,3 +285,12 @@ h2 {
 .item:hover .item__pourcentage {
   transform: translateX(-20px);
 }
+
+/**********************************************
+*** CHART PART
+**********************************************/
+
+#chartdiv {
+  height: 500px;
+  width: 100%
+}

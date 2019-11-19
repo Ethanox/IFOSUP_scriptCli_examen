@@ -3,7 +3,8 @@ import { addBudgetList, updatePourc } from '../views/ViewList';
 import { updateView } from '../views/ViewBudget';
 import { DOMString } from '../config';
 
-export const ctrlForm = (budgetClass) => {
+export const ctrlForm = (budgetClass, chartClass) => {
+	console.log(chartClass)
 	if(ctrlFormValidate()) {
 		let temp = document.querySelector(DOMString.FORM_MONTH);
 		const month = parseFloat(temp[temp.selectedIndex].value);
@@ -16,5 +17,6 @@ export const ctrlForm = (budgetClass) => {
 		addBudgetList(newBudget, budgetClass.getTot("ent", month));
 		updatePourc(budgetClass, month)
 		updateView(budgetClass, month);
+		chartClass.updateData(budgetClass)
 	}
 }

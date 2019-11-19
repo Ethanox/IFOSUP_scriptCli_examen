@@ -47,16 +47,6 @@ export const addBudgetList = (budget, sumBudgetEnt) => {
         </div>`
 	}
 	document.querySelector("#accordion_body_" + budget.type + "_" + budget.month + " > .card-body").insertAdjacentHTML('afterbegin', balise)
-	
-	// close all collapse
-	$('.collapse').collapse('hide')
-
-	sleep(500).then(() => { // fix a bug where collapse('hide') make time (due to animations) so if we don't wait, element is closing when i said to reopen it (not sure about this bug)
-		// open 'entree' collapse
-		$("#accordion_body_ent_" + budget.month).collapse('show')
-		// open 'expense' collapse
-		$("#accordion_body_dep_" + budget.month).collapse('show')
-	});
 }
 
 export const removeBudgetList = (budget, isLastInMonth) => {
@@ -70,14 +60,23 @@ export const removeBudgetList = (budget, isLastInMonth) => {
 
 export const updatePourc = (budgetClass, month) => {
 	const total = budgetClass.getTot("ent", month)
-	document.querySelectorAll("#accordion_body_dep_" + month +" .item__pourcentage").forEach(el => {
+	document.querySelectorAll("#accordion_body_dep_" + month + " .item__pourcentage").forEach(el => {
 		const budgetId = el.parentNode.parentNode.id;
 		const budget = budgetClass.getBudget(budgetId)
-		el.innerHTML = (total === 0 ? "---" : Math.round((budget.value / total) * 100)) +"%"
+		el.innerHTML = (total === 0 ? "---" : Math.round((budget.value / total) * 100)) + "%"
 	})
 }
 
+export const updateCollapse = (month) => {
+	// close all collapse
+	$('.collapse').collapse('hide')
+	// open 'entree' collapse
+	$("#accordion_body_ent_" + month).collapse('show')
+	// open 'expense' collapse
+	$("#accordion_body_dep_" + month).collapse('show')
+}
 
-function sleep (time) {
+
+function sleep(time) {
 	return new Promise((resolve) => setTimeout(resolve, time));
-  }
+}
