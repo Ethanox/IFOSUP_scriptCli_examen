@@ -2,21 +2,24 @@
 export default class Budget {
 	constructor() {
 		this.budgets = []
-		this.getStorage()
+		if (this.isLocalStorageAvailable())
+			this.getStorage()
 	}
 
 	addBudget(month, type, desc, value) {
 		const id = this.generateNewId()
 		const budget = { id, month, type, desc, value }
 		this.budgets.push(budget)
-		this.localStorage()
+		if (this.isLocalStorageAvailable())
+			this.localStorage()
 		return budget
 	}
 
 	removeBudget(id) {
 		const index = this.budgets.findIndex(el => el.id === id)
 		this.budgets.splice(index, 1)
-		this.localStorage()
+		if (this.isLocalStorageAvailable())
+			this.localStorage()
 	}
 
 	generateNewId() {
@@ -37,13 +40,17 @@ export default class Budget {
 	}
 
 	localStorage() {
-		localStorage.setItem('budget', JSON.stringify(this.budgets));
+		if (this.isLocalStorageAvailable()) {
+			localStorage.setItem('budget', JSON.stringify(this.budgets));
+		}
 	}
 
 	getStorage() {
-		const storage = JSON.parse(localStorage.getItem('budget'))
-		if (storage) {
-			this.budgets = storage
+		if (this.isLocalStorageAvailable()) {
+			const storage = JSON.parse(localStorage.getItem('budget'))
+			if (storage) {
+				this.budgets = storage
+			}
 		}
 	}
 
@@ -63,5 +70,15 @@ export default class Budget {
 				returnVar = false
 		})
 		return returnVar
+	}
+
+	isLocalStorageAvailable() {
+		try {
+			localStorage.setItem("test", "test")
+			localStorage.removeItem('test')
+			return true
+		} catch (e) {
+			return false
+		}
 	}
 }
