@@ -1,33 +1,20 @@
-import { clear } from '../views/ViewForm';
-import { addBudgetList } from '../views/ViewList';
+import { clear, ctrlFormValidate } from '../views/ViewForm';
+import { addBudgetList, updatePourc } from '../views/ViewList';
 import { updateView } from '../views/ViewBudget';
 import { DOMString } from '../config';
 
-export const ctrlForm = (budget) => {
-	let temp = document.querySelector(DOMString.FORM_MONTH);
-	const month = temp[temp.selectedIndex].value;
-	temp = document.querySelector(DOMString.FORM_TYPE);
-	const type = temp[temp.selectedIndex].value;
-	const desc = document.querySelector(DOMString.FORM_DESC).value;
-	const value = document.querySelector(DOMString.FORM_VALUE).value;
-	const newBudget = budget.addBudget(month, type, desc, value);
-	clear();
-	addBudgetList(newBudget);
-	updateView(budget);
-}
-
-export const ctrlFormValidate = (target) => {
-	if (target.className.includes("add__description")) { // SI champ description
-		if (target.value === "") {
-			target.style.borderColor = DOMString.FORM_INPUT_ERROR_COLOR;
-		} else {
-			target.style.borderColor = DOMString.FORM_INPUT_VALID_COLOR;
-		}
-	} else if (target.className.includes("add__valeur")) { // SI champ valeur
-		if (target.value === "" || target.value === 0 || typeof target.value == "number") {
-			target.style.borderColor = DOMString.FORM_INPUT_ERROR_COLOR;
-		} else {
-			target.style.borderColor = DOMString.FORM_INPUT_VALID_COLOR;
-		}
+export const ctrlForm = (budgetClass) => {
+	if(ctrlFormValidate()) {
+		let temp = document.querySelector(DOMString.FORM_MONTH);
+		const month = parseFloat(temp[temp.selectedIndex].value);
+		temp = document.querySelector(DOMString.FORM_TYPE);
+		const type = temp[temp.selectedIndex].value;
+		const desc = document.querySelector(DOMString.FORM_DESC).value;
+		const value = document.querySelector(DOMString.FORM_VALUE).value;
+		const newBudget = budgetClass.addBudget(month, type, desc, value);
+		clear();
+		addBudgetList(newBudget, budgetClass.getTot("ent", month));
+		updatePourc(budgetClass, month)
+		updateView(budgetClass, month);
 	}
 }

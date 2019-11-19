@@ -8,12 +8,6 @@ export const updateView = (budgetClass, month) => {
 	document.querySelector(DOMString.BUDGET_GLOBAL).textContent = formatNombre((entree - expense), entree >= expense ? "ent" : "dep")
 	document.querySelector(DOMString.BUDGET_EXPENSE_POURC).textContent = (entree === 0 ? "---" : Math.round((expense / entree) * 100)) + "%"
 	document.querySelector(DOMString.BUDGET_TITLE_MONTH).textContent = MONTH[month]
-	// close all collapse
-	$('.collapse').collapse('hide')
-	// open 'entree' collapse
-	$("#accordion_body_ent_" + month).collapse('show')
-	// open 'expense' collapse
-	$("#accordion_body_dep_" + month).collapse('show')
 }
 
 const formatNombre = function (nombre, type) {

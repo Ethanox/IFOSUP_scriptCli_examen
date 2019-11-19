@@ -4,20 +4,17 @@ export default class Budget {
 		this.budgets = []
 		this.getStorage()
 	}
-	
+
 	addBudget(month, type, desc, value) {
 		const id = this.generateNewId()
-		const budget = {id, month, type, desc, value }
+		const budget = { id, month, type, desc, value }
 		this.budgets.push(budget)
 		this.localStorage()
 		return budget
 	}
 
 	removeBudget(id) {
-		console.log(id)
-		console.log(this.budgets)
 		const index = this.budgets.findIndex(el => el.id === id)
-		console.log(index)
 		this.budgets.splice(index, 1)
 		this.localStorage()
 	}
@@ -32,8 +29,9 @@ export default class Budget {
 	getTot(type, month) {
 		let sum = 0
 		this.budgets.forEach((budget) => {
-			if ((type === "*" || budget.type === type) && month === budget.month)
+			if ((type === "*" || budget.type === type) && month === budget.month) {
 				sum += parseFloat(budget.value);
+			}
 		})
 		return sum
 	}
@@ -49,7 +47,21 @@ export default class Budget {
 		}
 	}
 
-	clearLocalStorage() {
-		localStorage.setItem('budget', JSON.stringify([]))
+	getBudget(id) {
+		let returnVar = false;
+		this.budgets.forEach((budget) => {
+			if (id === budget.id)
+				returnVar = budget
+		})
+		return returnVar
+	}
+
+	isEmptyMonth(type, month) {
+		let returnVar = true;
+		this.budgets.forEach((budget) => {
+			if ((type === "*" || type === budget.type) && month === budget.month)
+				returnVar = false
+		})
+		return returnVar
 	}
 }
