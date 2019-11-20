@@ -1,51 +1,25 @@
-import { MONTH, DOMString } from "../config";
+import { MONTH, DOMString, DOMTags } from "../config";
 import { isRegExp } from "util";
 
 export const addBudgetList = (budget, sumBudgetEnt) => {
 	let balise;
 
 	if (!document.querySelector("#accordion_header_" + budget.type + "_" + budget.month)) {
-		balise = `
-		<div class="card">
-			<div class="card-header" id="accordion_header_${budget.type + "_" + budget.month}" month="${budget.month}">
-				<a data-toggle="collapse" href="#accordion_body_${budget.type + "_" + budget.month}" role="button" aria-expanded="false" aria-controls="accordion_body_${budget.type}_${budget.month}">
-					${MONTH[budget.month]}
-				</a>
-			</div>
-
-			<div id="accordion_body_${budget.type}_${budget.month}" class="collapse" aria-labelledby="accordion_header_${budget.type}_${budget.month}">
-				<div class="card-body">
-				</div>
-			</div>
-		</div>`
+		balise = DOMTags.NEW_ACCORDION
+		balise = balise.replaceAll("%BUDGET_TYPE%", budget.type)
+		balise = balise.replaceAll("%BUDGET_MONTH_ID%", budget.month)
+		balise = balise.replaceAll("%BUDGET_MONTH_NAME%", MONTH[budget.month])
 		document.querySelector(budget.type === "ent" ? DOMString.LIST_ENTREE : DOMString.LIST_DEPENSE).insertAdjacentHTML('afterbegin', balise);
 	}
 	if (budget.type === "ent") {
-		balise = `
-		<div class="item clearfix" id="${budget.id}">
-			<div class="item__description">${budget.desc}</div>
-				<div class="right clearfix">
-					<div class="item__valeur">+ ${budget.value}€</div>
-						<div class="item__delete">
-							<button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>`
+		balise = DOMTags.NEW_BUDGET_ENT
 	} else {
-		balise = `
-		<div class="item clearfix" id="${budget.id}">
-			<div class="item__description">${budget.desc}</div>
-            <div class="right clearfix">
-                <div class="item__valeur">- ${budget.value}€</div>
-                <div class="item__pourcentage">${sumBudgetEnt === 0 ? "---" : Math.round((budget.value / sumBudgetEnt) * 100)}%</div>
-                <div class="item__delete">
-                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                </div>
-            </div>
-        </div>`
+		balise = DOMTags.NEW_BUDGET_DEP
 	}
+	balise = balise.replaceAll("%BUDGET_ID%", budget.id)
+	balise = balise.replaceAll("%BUDGET_DESC%", budget.desc)
+	balise = balise.replaceAll("%BUDGET_VALUE%", budget.value)
+	balise = balise.replaceAll("%BUDGET_POURC%", sumBudgetEnt === 0 ? "---" : Math.round((budget.value / sumBudgetEnt) * 100))
 	document.querySelector("#accordion_body_" + budget.type + "_" + budget.month + " > .card-body").insertAdjacentHTML('afterbegin', balise)
 }
 
@@ -68,15 +42,13 @@ export const updatePourc = (budgetClass, month) => {
 }
 
 export const updateCollapse = (month) => {
+	console.log(month);
+	
 	// close all collapse
-	$('.collapse').collapse('hide')
+	$('#entree .collapse').collapse('hide')
+	$('#depense .collapse').collapse('hide')
 	// open 'entree' collapse
 	$("#accordion_body_ent_" + month).collapse('show')
 	// open 'expense' collapse
 	$("#accordion_body_dep_" + month).collapse('show')
-}
-
-
-function sleep(time) {
-	return new Promise((resolve) => setTimeout(resolve, time));
 }

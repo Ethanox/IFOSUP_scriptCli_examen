@@ -18,6 +18,7 @@ export const initForm = () => {
 export const ctrlFormValidate = () => {
 	let DOMInvalid = "";
 	const array = [DOMString.FORM_MONTH, DOMString.FORM_TYPE, DOMString.FORM_DESC, DOMString.FORM_VALUE]
+	array.reverse() // if form not valid => go to first input error
 	array.forEach(el => {
 		let target = document.querySelector(el)
 		if (!target.value || target.value === "" || target.value === "---") {

@@ -25,8 +25,8 @@ export const createChart = (budgetClass) => {
 
 
 	let valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-	valueAxis.min = -120;
-	valueAxis.max = 120;
+	valueAxis.min = -100;
+	valueAxis.max = 100;
 	valueAxis.renderer.minGridDistance = 50;
 	valueAxis.renderer.ticks.template.length = 5;
 	valueAxis.renderer.ticks.template.disabled = false;
