@@ -1,13 +1,13 @@
 
 export default class Budget {
+	static list = []
 	constructor(month, type, desc, value) {
 		this.id = Budget.generateNewId();
 		this.month = month;
 		this.type = type;
 		this.desc = desc;
 		this.value = value;
-		if(!Budget.list)
-			Budget.list = []
+		Budget.list = []
 		Budget.list.push(this)
 		if (Budget.isLocalStorageAvailable())
 			Budget.save()
