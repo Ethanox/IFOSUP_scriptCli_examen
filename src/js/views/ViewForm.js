@@ -1,35 +1,27 @@
-import { DOMString, MONTH } from "../config";
+import * as config from "../config";
 
 export const clear = () => {
-	document.querySelector(DOMString.FORM).reset()
-	document.querySelector(DOMString.FORM_MONTH).focus()
+	document.querySelector(config.DOMString.FORM).reset()
+	document.querySelector(config.DOMString.FORM_MONTH).focus()
 }
 
-export const initForm = () => {
-	for (let [key, value] of Object.entries(MONTH)) {
+export const init = () => {
+	for (let [key, value] of Object.entries(config.month)) {
 		const balise = "<option value='%key%'>%value%</option>"
 		balise = balise.replace("%key%", key)
 		balise = balise.replace("%value%", value)
-		document.querySelector(DOMString.FORM_MONTH).insertAdjacentHTML('beforeend', balise);
+		document.querySelector(config.DOMString.FORM_MONTH).insertAdjacentHTML('beforeend', balise);
 	}
-	document.querySelector(DOMString.FORM_MONTH).focus()
+	document.querySelector(config.DOMString.FORM_MONTH).focus()
 }
 
-export const ctrlFormValidate = () => {
-	let DOMInvalid = "";
-	const array = [DOMString.FORM_MONTH, DOMString.FORM_TYPE, DOMString.FORM_DESC, DOMString.FORM_VALUE]
-	array.reverse() // if form not valid => go to first input error
-	array.forEach(el => {
-		let target = document.querySelector(el)
-		if (!target.value || target.value === "" || target.value === "---") {
-			target.style.borderColor = DOMString.FORM_INPUT_ERROR_COLOR
-			DOMInvalid = el
-		} else {
-			target.style.borderColor = DOMString.FORM_INPUT_VALID_COLOR
-		}
-	})
-	if(DOMInvalid !== "") {
-		document.querySelector(DOMInvalid).focus()
+export const update = (DOMStringForm, DOMIncorrect) => {
+	DOMStringForm.forEach(el => {
+		document.querySelector(el).style.borderColor = DOMIncorrect.includes(el) ? config.DOMString.FORM_INPUT_ERROR_COLOR : config.DOMString.FORM_INPUT_VALID_COLOR
+	});
+	if(DOMIncorrect.length === 0) { // if no error then focus first form element
+		document.querySelector(DOMStringForm[0]).focus()
+	} else { // else focus first wrong element
+		document.querySelector(DOMIncorrect[0]).focus()
 	}
-	return DOMInvalid === ""
 }

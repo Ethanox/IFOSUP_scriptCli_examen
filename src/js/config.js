@@ -18,7 +18,7 @@ export const DOMString = {
 	LIST_DEPENSE: ".depense__list"
 }
 
-export const MONTH = [
+export const month = [
 	"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"
 ]
 

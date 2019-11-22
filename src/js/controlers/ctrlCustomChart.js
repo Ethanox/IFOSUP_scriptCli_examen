@@ -1,9 +1,7 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { MONTH } from "../config";
-import CustomChart from "../models/CustomChart";
-import { viewSetTitleCChart } from "../views/ViewCharts";
+import * as viewCharts from "../views/viewCharts";
 
 export const createChart = (budgetClass) => {
 	am4core.useTheme(am4themes_animated);
@@ -12,7 +10,7 @@ export const createChart = (budgetClass) => {
 	let chart = am4core.create("chartdiv", am4charts.XYChart);
 
 	// Title
-	chart = viewSetTitleCChart(chart);
+	chart = viewCharts.setTitle(chart);
 
 	// Create axes
 	let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());

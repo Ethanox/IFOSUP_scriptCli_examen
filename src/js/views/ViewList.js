@@ -1,20 +1,19 @@
-import { MONTH, DOMString, DOMTags } from "../config";
-import { isRegExp } from "util";
+import * as config from "../config";
 
-export const addBudgetList = (budget, sumBudgetEnt) => {
+export const addBudget = (budget, sumBudgetEnt) => {
 	let balise;
 
 	if (!document.querySelector("#accordion_header_" + budget.type + "_" + budget.month)) {
-		balise = DOMTags.NEW_ACCORDION
+		balise = config.DOMTags.NEW_ACCORDION
 		balise = balise.replaceAll("%BUDGET_TYPE%", budget.type)
 		balise = balise.replaceAll("%BUDGET_MONTH_ID%", budget.month)
-		balise = balise.replaceAll("%BUDGET_MONTH_NAME%", MONTH[budget.month])
-		document.querySelector(budget.type === "ent" ? DOMString.LIST_ENTREE : DOMString.LIST_DEPENSE).insertAdjacentHTML('afterbegin', balise);
+		balise = balise.replaceAll("%BUDGET_MONTH_NAME%", config.month[budget.month])
+		document.querySelector(budget.type === "ent" ? config.DOMString.LIST_ENTREE : config.DOMString.LIST_DEPENSE).insertAdjacentHTML('afterbegin', balise);
 	}
 	if (budget.type === "ent") {
-		balise = DOMTags.NEW_BUDGET_ENT
+		balise = config.DOMTags.NEW_BUDGET_ENT
 	} else {
-		balise = DOMTags.NEW_BUDGET_DEP
+		balise = config.DOMTags.NEW_BUDGET_DEP
 	}
 	balise = balise.replaceAll("%BUDGET_ID%", budget.id)
 	balise = balise.replaceAll("%BUDGET_DESC%", budget.desc)
@@ -23,7 +22,7 @@ export const addBudgetList = (budget, sumBudgetEnt) => {
 	document.querySelector("#accordion_body_" + budget.type + "_" + budget.month + " > .card-body").insertAdjacentHTML('afterbegin', balise)
 }
 
-export const removeBudgetList = (budget, isLastInMonth) => {
+export const removeBudget = (budget, isLastInMonth) => {
 	let toDelete = document.getElementById(budget.id);
 	toDelete.parentNode.removeChild(toDelete);
 	if (isLastInMonth) {
@@ -42,8 +41,6 @@ export const updatePourc = (budgetClass, month) => {
 }
 
 export const updateCollapse = (month) => {
-	console.log(month);
-	
 	// close all collapse
 	$('#entree .collapse').collapse('hide')
 	$('#depense .collapse').collapse('hide')

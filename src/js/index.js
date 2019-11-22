@@ -1,46 +1,47 @@
-import { ctrlForm } from './controlers/crtlForm'
-import { ctrlListRemove, ctrlListInit } from './controlers/ctrlList'
-import { updateView } from './views/ViewBudget'
-import { initForm, ctrlFormValidate } from './views/ViewForm'
-import { DOMString } from './config'
-import { createChart } from './controlers/ctrlCustomChart'
-import { updateCollapse } from './views/ViewList'
+import * as config from './config'
+
+import * as ctrlList from './controlers/ctrlList'
+import * as crtlForm from './controlers/crtlForm'
+import * as ctrlCustomChart from './controlers/ctrlCustomChart'
+
+import * as viewBudget from './views/viewBudget'
+import * as viewForm from './views/viewForm'
+import * as viewList from './views/viewList'
 
 import Budget from './models/Budget'
 import CustomChart from './models/CustomChart'
 
-import './views/ViewCharts'
-
+import './views/viewCharts'
 import '../styles/style.css'
 
 window.addEventListener('load', () => {
 	const budgetClass = new Budget();
 
-	const chart = createChart(budgetClass)
+	const chart = ctrlCustomChart.createChart(budgetClass)
 	console.log(chart);
 	
 	const chartClass = new CustomChart(budgetClass, chart)
 	
-	initForm();
-	ctrlListInit(budgetClass)
-	updateView(budgetClass, 0)
-	updateCollapse(0)
+	viewForm.init();
+	ctrlList.init(budgetClass)
+	viewBudget.update(budgetClass, 0)
+	viewList.updateCollapse(0)
 	
-	document.querySelector(DOMString.FORM).addEventListener('submit', (event) => {
+	document.querySelector(config.DOMString.FORM).addEventListener('submit', (event) => {
 		event.preventDefault(); // prevent page to reload
-		ctrlForm(budgetClass, chartClass);
+		crtlForm.check(budgetClass, chartClass);
 	})
 	
 	document.addEventListener("click", (event) => {
 		if (event.target) {
-			if (event.target.className.includes(DOMString.LIST_CLOSE_BTN_CLASS)) {
+			if (event.target.className.includes(config.DOMString.LIST_CLOSE_BTN_CLASS)) {
 				const id = event.target.parentNode.parentNode.parentNode.parentNode.id;
-				ctrlListRemove(budgetClass, id);
-				createChart(budgetClass)
+				ctrlList.remove(budgetClass, id);
+				CtrlCustomChart.createChart(budgetClass)
 			}
 			if (event.target.parentNode.id && event.target.parentNode.id.includes("accordion_header")) {
-				updateView(budgetClass, event.target.parentNode.getAttribute("month"))
-				updateCollapse(event.target.parentNode.getAttribute("month"))
+				ViewBudget.update(budgetClass, event.target.parentNode.getAttribute("month"))
+				ViewList.updateCollapse(event.target.parentNode.getAttribute("month"))
 				chartClass.updateData(budgetClass)
 			}
 		}

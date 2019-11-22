@@ -1,4 +1,4 @@
-import { MONTH } from "../config";
+import * as config from "../config";
 
 export default class CustomChart {
 	constructor(budgetClass, chart) {
@@ -8,7 +8,7 @@ export default class CustomChart {
 
 	updateData(budgetClass) {
 		const newData = []
-		for (let [key, value] of Object.entries(MONTH)) {
+		for (let [key, value] of Object.entries(config.month)) {
 			const depTot = budgetClass.getTot("dep", key)
 			const entTot = budgetClass.getTot("ent", key)
 			newData.push({

@@ -1,5 +1,6 @@
 
 export default class Budget {
+	
 	constructor() {
 		this.budgets = []
 		if (this.isLocalStorageAvailable())
