@@ -1,38 +1,36 @@
 
 export default class Budget {
-	
-	constructor() {
-		this.budgets = []
-		if (this.isLocalStorageAvailable())
-			this.getStorage()
+	constructor(month, type, desc, value) {
+		this.id = Budget.generateNewId();
+		this.month = month;
+		this.type = type;
+		this.desc = desc;
+		this.value = value;
+		if(!Budget.list)
+			Budget.list = []
+		Budget.list.push(this)
+		if (Budget.isLocalStorageAvailable())
+			Budget.save()
 	}
 
-	addBudget(month, type, desc, value) {
-		const id = this.generateNewId()
-		const budget = { id, month, type, desc, value }
-		this.budgets.push(budget)
-		if (this.isLocalStorageAvailable())
-			this.localStorage()
-		return budget
+
+	static removeBudget(id) {
+		const index = Budget.list.findIndex(el => el.id === id)
+		Budget.list.splice(index, 1)
+		if (Budget.isLocalStorageAvailable())
+			Budget.save()
 	}
 
-	removeBudget(id) {
-		const index = this.budgets.findIndex(el => el.id === id)
-		this.budgets.splice(index, 1)
-		if (this.isLocalStorageAvailable())
-			this.localStorage()
-	}
-
-	generateNewId() {
+	static generateNewId = () => {
 		// TODO security: prevent same ID
 		const min = Math.ceil(100000)
 		const max = Math.floor(999999)
 		return "ID" + (Math.floor(Math.random() * (max - min)) + min)
 	}
 
-	getTot(type, month) {
+	static getTot(type, month) {
 		let sum = 0
-		this.budgets.forEach((budget) => {
+		Budget.list.forEach((budget) => {
 			if ((type === "*" || budget.type === type) && month == budget.month) {
 				sum += parseFloat(budget.value);
 			}
@@ -40,40 +38,42 @@ export default class Budget {
 		return sum
 	}
 
-	localStorage() {
+	static save() {
 		if (this.isLocalStorageAvailable()) {
-			localStorage.setItem('budget', JSON.stringify(this.budgets));
+			localStorage.setItem('budget', JSON.stringify(Budget.list));
 		}
 	}
 
-	getStorage() {
-		if (this.isLocalStorageAvailable()) {
+	static restore() {
+		if (Budget.isLocalStorageAvailable()) {
 			const storage = JSON.parse(localStorage.getItem('budget'))
 			if (storage) {
-				this.budgets = storage
+				Budget.list = storage
 			}
+		} else {
+			Budget.list = []
 		}
 	}
 
-	getBudget(id) {
+	static getBudget(id) {
 		let returnVar = false;
-		this.budgets.forEach((budget) => {
+		Budget.list.forEach((budget) => {
 			if (id === budget.id)
 				returnVar = budget
 		})
 		return returnVar
 	}
 
-	isEmptyMonth(type, month) {
+	static isEmptyMonth(type, month) {
 		let returnVar = true;
-		this.budgets.forEach((budget) => {
+		Budget.list.forEach((budget) => {
 			if ((type === "*" || type === budget.type) && (month === "*" || month === budget.month))
 				returnVar = false
 		})
 		return returnVar
 	}
 
-	isLocalStorageAvailable() {
+	static isLocalStorageAvailable() {
 		try {
 			localStorage.setItem("test", "test")
 			localStorage.removeItem('test')
@@ -83,9 +83,9 @@ export default class Budget {
 		}
 	}
 
-	getMaxValue(type, month) {
+	static getMaxValue(type, month) {
 		let maxValue = 0;
-		this.budgets.forEach((budget) => {
+		Budget.list.forEach((budget) => {
 			if ((type === "*" || type === budget.type) && (month === "*" || month === budget.month) && maxValue < budget.value)
 				maxValue = budget.value
 		})

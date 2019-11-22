@@ -1,17 +1,18 @@
 import * as viewList from '../views/viewList';
 import * as viewBudget from '../views/viewBudget';
+import Budget from '../models/Budget';
 
-export const remove = (budgetClass, budgetId) => {
-	const budget = budgetClass.getBudget(budgetId);
-	budgetClass.remove(budgetId);
-	viewList.removeBudget(budget, budgetClass.isEmptyMonth("ent", budget.month));
-	viewList.updatePourc(budgetClass, budget.month);
-	viewBudget.update(budgetClass, new Date().getMonth());
+export const remove = (budgetId) => {
+	const budget = Budget.getBudget(budgetId);
+	Budget.removeBudget(budgetId);
+	viewList.removeBudget(budget, Budget.isEmptyMonth("ent", budget.month));
+	viewList.updatePourc(budget.month);
+	viewBudget.update(new Date().getMonth());
 	viewList.updateCollapse(new Date().getMonth())
 };
 
-export const init = (budgetClass) => {
-	budgetClass.budgets.forEach(budget => {
-		viewList.addBudget(budget, budgetClass.getTot("ent", budget.month))
+export const init = () => {
+	Budget.list.forEach(budget => {
+		viewList.addBudget(budget, Budget.getTot("ent", budget.month))
 	})
 }

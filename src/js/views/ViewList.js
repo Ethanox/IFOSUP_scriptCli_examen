@@ -1,4 +1,5 @@
 import * as config from "../config";
+import Budget from "../models/Budget";
 
 export const addBudget = (budget, sumBudgetEnt) => {
 	let balise;
@@ -31,11 +32,11 @@ export const removeBudget = (budget, isLastInMonth) => {
 	}
 }
 
-export const updatePourc = (budgetClass, month) => {
-	const total = budgetClass.getTot("ent", month)
+export const updatePourc = (month) => {
+	const total = Budget.getTot("ent", month)
 	document.querySelectorAll("#accordion_body_dep_" + month + " .item__pourcentage").forEach(el => {
 		const budgetId = el.parentNode.parentNode.id;
-		const budget = budgetClass.getBudget(budgetId)
+		const budget = Budget.getBudget(budgetId)
 		el.innerHTML = (total === 0 ? "---" : Math.round((budget.value / total) * 100)) + "%"
 	})
 }

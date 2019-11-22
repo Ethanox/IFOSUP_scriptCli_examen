@@ -3,7 +3,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as viewCharts from "../views/viewCharts";
 
-export const createChart = (budgetClass) => {
+export const createChart = () => {
 	am4core.useTheme(am4themes_animated);
 
 	// Create chart instance

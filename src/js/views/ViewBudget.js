@@ -1,8 +1,9 @@
 import * as config from "../config"
+import Budget from "../models/Budget"
 
-export const update = (budgetClass, month) => {
-	const entree = budgetClass.getTot("ent", month)
-	const expense = budgetClass.getTot("dep", month)
+export const update = (month) => {
+	const entree = Budget.getTot("ent", month)
+	const expense = Budget.getTot("dep", month)
 	document.querySelector(config.DOMString.BUDGET_ENTREE).textContent = formatNombre(entree, "ent")
 	document.querySelector(config.DOMString.BUDGET_EXPENSE).textContent = formatNombre(expense, "dep")
 	document.querySelector(config.DOMString.BUDGET_GLOBAL).textContent = formatNombre((entree - expense), entree >= expense ? "ent" : "dep")
