@@ -42,9 +42,10 @@ export const updatePourc = (month) => {
 }
 
 export const updateCollapse = (month) => {
+	console.log(month)
 	// close all collapse
-	$('#entree .collapse').collapse('hide')
-	$('#depense .collapse').collapse('hide')
+	$('#accordion_body_ent_'+ Budget.lastFocusedMonth).collapse('hide')
+	$('#accordion_body_dep_'+ Budget.lastFocusedMonth).collapse('hide')
 	// open 'entree' collapse
 	$("#accordion_body_ent_" + month).collapse('show')
 	// open 'expense' collapse

@@ -5,7 +5,7 @@ import * as config from '../config';
 import Budget from '../models/Budget';
 
 export const send = (chartClass) => {
-	const DOMIncorrect = validate();
+	const DOMIncorrect = validate()
 	const DOMStringForm = [config.DOMString.FORM_MONTH, config.DOMString.FORM_TYPE, config.DOMString.FORM_DESC, config.DOMString.FORM_VALUE]
 	if(DOMIncorrect.length === 0) {
 		let temp = document.querySelector(config.DOMString.FORM_MONTH);

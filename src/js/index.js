@@ -13,34 +13,39 @@ import CustomChart from './models/CustomChart'
 
 import './views/viewCharts'
 import '../styles/style.css'
+import * as ctrlMonth from './controlers/ctrlMonth'
 
 window.addEventListener('load', () => {
+	$('.collapse').on('show.bs.collapse hide.bs.collapse', (e) => {
+		e.preventDefault();
+	});
 	Budget.restore();
 
 	const chart = ctrlCustomChart.createChart()
 	const chartClass = new CustomChart(chart)
-	
+
 	viewForm.init();
 	ctrlList.init()
 	viewBudget.update(0)
-	viewList.updateCollapse(0)
-	
+	viewList.updateCollapse(ctrlMonth.getCurrentMonth())
+
 	document.querySelector(config.DOMString.FORM).addEventListener('submit', (event) => {
 		event.preventDefault(); // prevent page to reload
 		crtlForm.send(chartClass);
 	})
-	
+
 	document.addEventListener("click", (event) => {
 		if (event.target) {
 			if (event.target.className.includes(config.DOMString.LIST_CLOSE_BTN_CLASS)) {
 				const id = event.target.parentNode.parentNode.parentNode.parentNode.id;
-				ctrlList.remove(id);
+				ctrlList.remove(id)
 				ctrlCustomChart.createChart()
 			}
 			if (event.target.parentNode.id && event.target.parentNode.id.includes("accordion_header")) {
 				viewBudget.update(event.target.parentNode.getAttribute("month"))
 				viewList.updateCollapse(event.target.parentNode.getAttribute("month"))
 				chartClass.updateData()
+				ctrlMonth.setCurrentMonth(event.target.parentNode.getAttribute("month"))
 			}
 		}
 	})
