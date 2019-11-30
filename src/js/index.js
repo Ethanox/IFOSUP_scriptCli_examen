@@ -26,8 +26,9 @@ window.addEventListener('load', () => {
 
 	viewForm.init();
 	ctrlList.init()
-	viewBudget.update(0)
-	viewList.updateCollapse(ctrlMonth.getCurrentMonth())
+	ctrlMonth.init()
+	viewBudget.update(ctrlMonth.getCurrentFocusedMonth())
+	viewList.updateCollapse(ctrlMonth.getCurrentFocusedMonth())
 
 	document.querySelector(config.DOMString.FORM).addEventListener('submit', (event) => {
 		event.preventDefault(); // prevent page to reload
@@ -42,10 +43,10 @@ window.addEventListener('load', () => {
 				ctrlCustomChart.createChart()
 			}
 			if (event.target.parentNode.id && event.target.parentNode.id.includes("accordion_header")) {
+				chartClass.updateData()
+				ctrlMonth.update(event.target.parentNode.getAttribute("month"))
 				viewBudget.update(event.target.parentNode.getAttribute("month"))
 				viewList.updateCollapse(event.target.parentNode.getAttribute("month"))
-				chartClass.updateData()
-				ctrlMonth.setCurrentMonth(event.target.parentNode.getAttribute("month"))
 			}
 		}
 	})

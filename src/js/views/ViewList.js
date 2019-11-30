@@ -1,5 +1,6 @@
 import * as config from "../config";
 import Budget from "../models/Budget";
+import * as ctrlMonth from "../controlers/ctrlMonth";
 
 export const addBudget = (budget, sumBudgetEnt) => {
 	let balise;
@@ -41,13 +42,15 @@ export const updatePourc = (month) => {
 	})
 }
 
-export const updateCollapse = (month) => {
-	console.log(month)
+export const updateCollapse = (month = ctrlMonth.getCurrentFocusedMonth()) => {
+	console.log(ctrlMonth.getLastFocusedMonth());
+	console.log(ctrlMonth.getCurrentFocusedMonth());
+	
 	// close all collapse
-	$('#accordion_body_ent_'+ Budget.lastFocusedMonth).collapse('hide')
-	$('#accordion_body_dep_'+ Budget.lastFocusedMonth).collapse('hide')
+	$('#accordion_body_ent_'+ ctrlMonth.getLastFocusedMonth()).collapse('hide')
+	$('#accordion_body_dep_'+ ctrlMonth.getLastFocusedMonth()).collapse('hide')
 	// open 'entree' collapse
-	$("#accordion_body_ent_" + month).collapse('show')
+	$("#accordion_body_ent_" + ctrlMonth.getCurrentFocusedMonth()).collapse('show')
 	// open 'expense' collapse
-	$("#accordion_body_dep_" + month).collapse('show')
+	$("#accordion_body_dep_" + ctrlMonth.getCurrentFocusedMonth()).collapse('show')
 }

@@ -1,19 +1,33 @@
 import Budget from "../models/Budget"
 import * as config from "../config";
 
-export const setCurrentMonth = (currentMonth) => {
+let lastFocusedMonth;
+let currentFocusedMonth;
+
+export const init = () => {
 	if(Budget.isLocalStorageAvailable()) {
-		console.log("test");
-		
-		localStorage.setItem("currentMonth", currentMonth)
+		currentFocusedMonth = localStorage.getItem("currentMonth") === null ? config.DEFAULT_MONTH_ID : localStorage.getItem("currentMonth");
+	} else {
+		currentFocusedMonth = config.DEFAULT_MONTH_ID;
 	}
 }
 
-export const getCurrentMonth = () => {
+export const getCurrentFocusedMonth = () => {
+	return currentFocusedMonth;
+}
+
+export const setLastFocusedMonth = (lastMonth) => {
+	lastFocusedMonth = lastMonth
+}
+
+export const getLastFocusedMonth = () => {
+	return lastFocusedMonth;
+}
+
+export const update = (newFocusedMonth) => {
+	lastFocusedMonth = currentFocusedMonth
+	currentFocusedMonth = newFocusedMonth
 	if(Budget.isLocalStorageAvailable()) {
-		console.log(localStorage.getItem("currentMonth"));
-		return localStorage.getItem("currentMonth");
-	} else {
-		return config.DEFAULT_MONTH_ID;
+		localStorage.setItem("currentMonth", currentFocusedMonth)
 	}
 }
