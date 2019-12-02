@@ -1,7 +1,8 @@
 import * as config from "../config"
+import * as ctrlMonth from "../controlers/ctrlMonth"
 import Budget from "../models/Budget"
 
-export const update = (month) => {
+export const update = (month = ctrlMonth.getCurrentFocusedMonth()) => {
 	const entree = Budget.getTot("ent", month)
 	const expense = Budget.getTot("dep", month)
 	document.querySelector(config.DOMString.BUDGET_ENTREE).textContent = formatNombre(entree, "ent")

@@ -12,8 +12,7 @@ export default class Budget {
 		Budget.list.push(this)
 		Budget.save()
 	}
-
-
+	
 	static removeBudget(id) {
 		const index = Budget.list.findIndex(el => el.id === id)
 		Budget.list.splice(index, 1)

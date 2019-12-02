@@ -27,12 +27,12 @@ export const DOMTags = {
 	NEW_ACCORDION: `
 		<div class="card">
 			<div class="card-header" id="accordion_header_%BUDGET_TYPE%_%BUDGET_MONTH_ID%" month="%BUDGET_MONTH_ID%">
-				<a data-toggle="collapse" href="#accordion_body_%BUDGET_TYPE%_%BUDGET_MONTH_ID%" role="button" aria-expanded="false" aria-controls="accordion_body_%BUDGET_TYPE%_%BUDGET_MONTH_ID%">
+				<a data-toggle="collapse" href="#" role="button" aria-expanded="false" data-target=".accordion_body_%BUDGET_MONTH_ID%" aria-controls="accordion_body_ent_%BUDGET_MONTH_ID% accordion_body_dep_%BUDGET_MONTH_ID%">
 					%BUDGET_MONTH_NAME%
 				</a>
 			</div>
 
-			<div id="accordion_body_%BUDGET_TYPE%_%BUDGET_MONTH_ID%" class="collapse" aria-labelledby="accordion_header_%BUDGET_TYPE%_%BUDGET_MONTH_ID%">
+			<div id="accordion_body_%BUDGET_TYPE%_%BUDGET_MONTH_ID%" class="collapse accordion_body_%BUDGET_MONTH_ID%" aria-labelledby="accordion_header_%BUDGET_TYPE%_%BUDGET_MONTH_ID%">
 				<div class="card-body"></div>
 			</div>
 		</div>`,

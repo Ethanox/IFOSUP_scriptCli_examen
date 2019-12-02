@@ -27,6 +27,7 @@ export const addBudget = (budget, sumBudgetEnt) => {
 export const removeBudget = (budget, isLastInMonth) => {
 	let toDelete = document.getElementById(budget.id);
 	toDelete.parentNode.removeChild(toDelete);
+	
 	if (isLastInMonth) {
 		toDelete = document.getElementById("accordion_header_" + budget.type + "_" + budget.month).parentNode;
 		toDelete.parentNode.removeChild(toDelete);
@@ -36,21 +37,19 @@ export const removeBudget = (budget, isLastInMonth) => {
 export const updatePourc = (month) => {
 	const total = Budget.getTot("ent", month)
 	document.querySelectorAll("#accordion_body_dep_" + month + " .item__pourcentage").forEach(el => {
-		const budgetId = el.parentNode.parentNode.id;
+		const budgetId = el.parentNode.parentNode.id
 		const budget = Budget.getBudget(budgetId)
 		el.innerHTML = (total === 0 ? "---" : Math.round((budget.value / total) * 100)) + "%"
 	})
 }
 
-export const updateCollapse = (month = ctrlMonth.getCurrentFocusedMonth()) => {
-	console.log(ctrlMonth.getLastFocusedMonth());
-	console.log(ctrlMonth.getCurrentFocusedMonth());
-	
-	// close all collapse
-	$('#accordion_body_ent_'+ ctrlMonth.getLastFocusedMonth()).collapse('hide')
-	$('#accordion_body_dep_'+ ctrlMonth.getLastFocusedMonth()).collapse('hide')
-	// open 'entree' collapse
-	$("#accordion_body_ent_" + ctrlMonth.getCurrentFocusedMonth()).collapse('show')
-	// open 'expense' collapse
-	$("#accordion_body_dep_" + ctrlMonth.getCurrentFocusedMonth()).collapse('show')
+export const closeCollapse = (monthId = ctrlMonth.getLastFocusedMonth()) => {
+	if(monthId !== undefined)
+		$('.accordion_body_' + monthId).collapse('hide')
+}
+
+export const openCollapse = (monthId = ctrlMonth.getCurrentFocusedMonth()) => {
+	closeCollapse()
+	if(monthId !== undefined)
+		$('.accordion_body_' + monthId).collapse('show')
 }

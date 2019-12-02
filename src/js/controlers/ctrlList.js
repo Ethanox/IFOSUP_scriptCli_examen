@@ -1,14 +1,20 @@
 import * as viewList from '../views/viewList';
 import * as viewBudget from '../views/viewBudget';
+import * as ctrlMonth from "../controlers/ctrlMonth"
 import Budget from '../models/Budget';
+import CustomChart from '../models/CustomChart';
 
-export const remove = (budgetId) => {
-	const budget = Budget.getBudget(budgetId);
+export const remove = (budgetId, chartClass) => {
+	const budget = Budget.getBudget(budgetId)
 	Budget.removeBudget(budgetId)
-	viewList.removeBudget(budget, Budget.isEmptyMonth("ent", budget.month))
+	viewList.removeBudget(budget, Budget.isEmptyMonth(budget.type, budget.month))
 	viewList.updatePourc(budget.month)
-	viewBudget.update(budget.month + 1) // update budget to de the next month
-	viewList.updateCollapse(budget.month + 1) // show list for the next month
+	if(Budget.getTot("*", budget.month) === 0) { // if no budget left for this month, focus next month
+		ctrlMonth.update(budget.month + 1)
+	}
+	viewBudget.update()
+	viewList.openCollapse() // show list for the next month
+	chartClass.updateData()
 };
 
 export const init = () => {

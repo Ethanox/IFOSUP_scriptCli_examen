@@ -23,7 +23,7 @@ export const send = (chartClass) => {
 		viewBudget.update(month)
 		chartClass.updateData()
 		viewForm.update(DOMStringForm, []);
-		viewList.updateCollapse(month)
+		viewList.openCollapse()
 	} else {
 		viewForm.update(DOMStringForm, DOMIncorrect);
 	}
