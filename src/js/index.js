@@ -18,6 +18,7 @@ import * as ctrlMonth from './controlers/ctrlMonth'
 window.addEventListener('load', () => {
 	Budget.restore()
 
+	console.log("debug chart 1");
 	const chart = ctrlCustomChart.createChart()
 	const chartClass = new CustomChart(chart)
 
@@ -25,7 +26,6 @@ window.addEventListener('load', () => {
 	ctrlList.init()
 	ctrlMonth.init()
 	viewBudget.update()
-	console.log(ctrlMonth.getCurrentFocusedMonth())
 	viewList.openCollapse()
 
 	document.querySelector(config.DOMString.FORM).addEventListener('submit', (event) => {
@@ -38,7 +38,7 @@ window.addEventListener('load', () => {
 			if (typeof event.target.className === "string" && event.target.className.includes(config.DOMString.LIST_CLOSE_BTN_CLASS)) {
 				const id = event.target.parentNode.parentNode.parentNode.parentNode.id;
 				ctrlList.remove(id, chartClass)
-				ctrlCustomChart.createChart()
+				chartClass.updateData()
 			}
 			
 			if (event.target.parentNode.id && event.target.parentNode.id.includes("accordion_header")) {
