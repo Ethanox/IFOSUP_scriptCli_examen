@@ -1,16 +1,16 @@
 import Budget from "../models/Budget"
-import * as config from "../config";
+import * as Config from "../config";
 
 let lastFocusedMonth;
 let currentFocusedMonth;
 
 export const init = () => {
-	if(Budget.isLocalStorageAvailable()) {
-		currentFocusedMonth = localStorage.getItem("currentMonth") === null ? config.DEFAULT_MONTH_ID : parseInt(localStorage.getItem("currentMonth"));
+	if(Budget.isLocalStorageAvailable() && localStorage.getItem("currentMonth") !== null) {
+		currentFocusedMonth = parseInt(localStorage.getItem("currentMonth"));
 	} else {
-		currentFocusedMonth = config.DEFAULT_MONTH_ID;
+		currentFocusedMonth = Config.DEFAULT_MONTH_ID;
 	}
-	currentFocusedMonth = parseInt(currentFocusedMonth);
+	currentFocusedMonth = currentFocusedMonth;
 }
 
 
